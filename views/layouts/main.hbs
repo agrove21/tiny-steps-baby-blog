@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiny Steps Baby Blog</title>
+  <title>{{title}}</title>
   <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css">
   <script src="https://cdn.tailwindcss.com"></script> 
@@ -18,11 +18,13 @@
 
   </header>
   <main class="container container-fluid mt-5">
-    {{!-- {{{ body }}} --}}
+    <div class="messages"></div>
+    {{{ body }}}
   </main>
   <footer>
       
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
+  <script src="/js/messages.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
 </html>
