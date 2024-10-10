@@ -39,7 +39,7 @@
 -->
     <div>
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-      <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
+      <div id="sidebar-mobile" class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
         <!--
       Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
@@ -75,7 +75,7 @@
             To: "opacity-0"
         -->
             <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-              <button type="button" class="-m-2.5 p-2.5">
+              <button type="button" class="-m-2.5 p-2.5" id="close-btn">
                 <span class="sr-only">Close sidebar</span>
                 <svg
                   class="h-6 w-6 text-white"
@@ -109,8 +109,34 @@
         {{> sidebar}}
       </div>
 
+      <div class="absolute lg:hidden border-black m-4 ">
+        <button
+          type="button"
+          class="lg:hidden p-2.5 rounded-md text-black"
+          id="open-btn"
+        >
+          <span class="sr-only">Open sidebar</span>
+          <svg
+            class="h-10 w-10 text-black font-bold"
+            fill="blue"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+      </div>
+
       <div class="lg:pl-72">
-        <main class="py-10">
+        <main class="py-2">
+          {{> header}}
           <div class="px-4 sm:px-6 lg:px-8">
             {{{body}}}
           </div>
@@ -121,5 +147,6 @@
       src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"
     ></script>
     <script src="/js/messages.js"></script>
+    <script src="/js/sidebar.js"></script>
   </body>
 </html>
