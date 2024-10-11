@@ -5,10 +5,10 @@ const bcrypt = require("bcrypt");
 // POST / signup
 router.post("/", async (req, res) => {
   try {
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.email || !req.body.password || !req.body.name) {
       res
         .status(400)
-        .json({ message: "Please provide a email and password" });
+        .json({ message: "Please provide a name, email, and password" });
       return;
     }
     const existingUser = await User.findOne({
@@ -18,8 +18,8 @@ router.post("/", async (req, res) => {
       res.status(400).json({ message: "User already exists" });
       return;
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    req.body.password = hashedPassword;
+    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    // req.body.password = hashedPassword;
     const userData = await User.create(req.body);
     delete userData.password;
     req.session.save(() => {

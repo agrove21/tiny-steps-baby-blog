@@ -3,6 +3,8 @@ const seedUsers = require('./userData');
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
+    await sequelize.sync({ force: true });
+
     await seedUsers();
     console.log("\n----- USERS SEEDED -----\n");
     
@@ -11,5 +13,3 @@ const seedAll = async () => {
 };
 
 seedAll();
-
-// module.exports = 
