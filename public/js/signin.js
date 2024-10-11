@@ -6,6 +6,7 @@ document
     const email = form.email.value;
     const password = form.password.value;
     const name = form.name.value;
+
     fetch("/api/users", {
       method: "POST",
       headers: {
@@ -39,6 +40,7 @@ document
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    
     fetch("/api/users/login", {
       method: "POST",
       headers: {
