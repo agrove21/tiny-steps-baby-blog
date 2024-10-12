@@ -61,9 +61,11 @@ router.post("/login", async (req, res) => {
         .json({ message: "Please provide a email and password" });
       return;
     }
+    console.log("testing user string", req.body)
     const userData = await User.findOne({
       where: { email: req.body.email },
     });
+    console.log("testing log in", userData)
     if (!userData) {
       res.status(400).json({ message: "User does not exist" });
       return;
