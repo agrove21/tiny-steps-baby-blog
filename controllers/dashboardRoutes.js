@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const { Image } = require("../model");
+const auth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   res.render("Welcome", {
@@ -22,11 +24,31 @@ router.get("/first", async (req, res) => {
     layout: "dashboard" });
 });
 
-router.get("/gallery", async (req, res) => {
-  res.render("gallery", { 
-    title: "Snapshot Memories", 
-    description: "Each snapshot captures the joy and love of your little one's journey, from special moments to everyday adventures.", 
-    layout: "dashboard" });
+router.get("/gallery", auth, async (req, res) => {
+  try {
+    const imagesData = await Image.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const images = imagesData.map((image) => image.get({ plain: true }));
+    console.log("testing images", images);
+    res.render("gallery", {
+      title: "Snapshot Memories",
+      description: "Each snapshot captures the joy and love of your little one's journey, from special moments to everyday adventures.",
+      layout: "dashboard",
+      images,
+    });
+  }
+  catch (err) {
+    res.render("gallery", {
+      title: "Snapshot Memories",
+      description: "Each snapshot captures the joy and love of your little one's journey, from special moments to everyday adventures.",
+      layout: "dashboard",
+      images: [],
+      error: "Failed to load images",
+    });
+  }
 });
 
 router.get("/advice", async (req, res) => {
