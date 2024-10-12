@@ -53,7 +53,7 @@ document
     })
       .then(function (response) {
         if (response.ok) {
-          document.location.replace("/dashboard");
+          document.location.replace("/dashboard/welcome");
         } else {
           return response.json();
         }
