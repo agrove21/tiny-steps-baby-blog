@@ -1,6 +1,26 @@
 const router = require("express").Router();
-const { User } = require("../../model");
+const { User, Image } = require("../../model");
 const bcrypt = require("bcrypt");
+const auth = require("../../utils/auth");
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'baby_images',
+    allowed_formats: ['jpg', 'png', 'jpeg'],
+  }
+})
+
+const upload = multer({ storage: storage });
 
 // POST / signup
 router.post("/", async (req, res) => {
@@ -66,6 +86,40 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Internal Error try again later" });
   }
 });
+
+router.post("/logout", auth, (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(400).end();
+  }
+});
+
+
+
+router.post("/upload", auth, upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      res.status(400).json({ message: "Please provide an image" });
+      return;
+    }
+    const image = await Image.create({
+      url: req.file.path,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(image);
+  } catch (err) {
+    res.status(400).json({ message: "Internal Error try again later" });
+  }
+});
+
+
+
+
+
+
 module.exports = router;
 
 
