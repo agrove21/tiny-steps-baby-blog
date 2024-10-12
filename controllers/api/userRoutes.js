@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const auth = require("../../utils/auth");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const fs = require("fs");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -12,15 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'baby_images',
-    allowed_formats: ['jpg', 'png', 'jpeg'],
-  }
-})
-
-const upload = multer({ storage: storage });
+const upload = multer({ dest: "uploads/" });
 
 // POST / signup
 router.post("/", async (req, res) => {
@@ -107,10 +99,15 @@ router.post("/upload", auth, upload.single('image'), async (req, res) => {
       res.status(400).json({ message: "Please provide an image" });
       return;
     }
+    const filePath = req.file.path;
+    const result = await cloudinary.uploader.upload(filePath);
     const image = await Image.create({
-      url: req.file.path,
+      url: result.secure_url,
       user_id: req.session.user_id,
     });
+
+    fs.unlinkSync(filePath);
+    
     res.status(200).json(image);
   } catch (err) {
     res.status(400).json({ message: "Internal Error try again later" });

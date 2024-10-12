@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Image Grid with lightGallery</title>
-        <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lightgallery.css" rel="stylesheet">
 
-    <style>
-        #lightgallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-        }
-
-        .gallery-item {
-            border: 1px solid #333;
-            padding: 10px;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<body>
-    <input type="file" id="upload" accept="image/*" onchange="previewImage()">
+    <input type="file" id="file-upload" accept="image/*">
+    <button class="upload">Upload</button>
 
     <div id="lightgallery" style="display: none;"></div>
         <!-- Image preview linked for LightGallery -->
@@ -37,15 +10,11 @@
     </div>
 
     <div id="lightgallery">
-        <div class="gallery-item" data-src="path_to_image_1.jpg">
-            <img src="path_to_thumbnail_1.jpg" alt="Image 1" />
-        </div>
-        <div class="gallery-item" data-src="path_to_image_2.jpg">
-            <img src="path_to_thumbnail_2.jpg" alt="Image 2" />
-        </div>
-        <div class="gallery-item" data-src="path_to_image_3.jpg">
-            <img src="path_to_thumbnail_3.jpg" alt="Image 3" />
-        </div>
+        {{#each images }}
+            <div class="gallery-item" data-src="{{ this.url }}">
+                <img src="{{ this.url }}" alt="baby image" />
+            </div>
+        {{/each }}
         <!-- More gallery items as needed -->
     </div>
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
@@ -56,10 +25,5 @@
     });
 });
 </script>
-<script src="/js/signin.js"></script>
-
-</body>
-
-
-</html>
+<script src="/js/gallery.js"></script>
 
