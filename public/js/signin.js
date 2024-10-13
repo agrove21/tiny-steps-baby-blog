@@ -59,7 +59,10 @@ document
         }
       })
         .then(function (data) {
+          if (data){
             showMessage(data.message, "error");
+          }
+            
         })
       .catch(function (error) {
         showMessage(error.message, "error");
