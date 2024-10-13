@@ -1,6 +1,6 @@
-
+<div class="p-8">
     <input type="file" id="file-upload" accept="image/*">
-    <button class="upload">Upload</button>
+    <button class="upload bg-black py-1 px-4 text-white border border-black rounded">Upload</button>
 
     <div id="lightgallery" style="display: none;"></div>
         <!-- Image preview linked for LightGallery -->
@@ -16,6 +16,7 @@
             </div>
         {{/each }}
         <!-- More gallery items as needed -->
+    </div>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
 <script> document.addEventListener('DOMContentLoaded', function () { lightGallery(document.getElementById('lightgallery'), 

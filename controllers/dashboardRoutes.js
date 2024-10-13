@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Image } = require("../model");
+const { Image, Entry } = require("../model");
 const auth = require("../utils/auth");
 
 router.get("/", auth, async (req, res) => {
@@ -23,13 +23,33 @@ router.get("/welcome", auth, async (req, res) => {
 });
 
 router.get("/blog", auth, async (req, res) => {
-  res.render("blog", {
-    title: "Tiny Tales",
-    description:
-      "Add an entry to capture and cherish every precious memory. ",
-    layout: "dashboard",
-    loggedIn: req.session.logged_in
-  });
+  try {
+    const entriesData = await Entry.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const entries = entriesData.map((entry) => entry.get({ plain: true }));
+    console.log("testing entries", entriesData);
+    res.render("blog", {
+      title: "Tiny Tales",
+      description:
+        "Add an entry to capture and cherish every precious memory. ",
+      layout: "dashboard",
+      entries,
+      loggedIn: req.session.logged_in
+    });
+  } catch (err) {
+    res.render("blog", {
+      title: "Tiny Tales",
+      description:
+        "Add an entry to capture and cherish every precious memory. ",
+      layout: "dashboard",
+      entries: [],
+      loggedIn: req.session.logged_in,
+      error: "Failed to load entries",
+    });
+  }
 });
 
 router.get("/first", auth, async (req, res) => {
