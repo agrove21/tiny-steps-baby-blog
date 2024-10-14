@@ -1,6 +1,7 @@
 const User = require('./user');
 const Image = require('./image');
 const Entry = require('./entry');
+const Baby = require('./baby');
 
 User.hasMany(Image, {
   foreignKey: 'user_id',
@@ -20,5 +21,13 @@ Entry.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
+User.hasMany(Baby, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
 
-module.exports = { User, Image, Entry };
+Baby.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+module.exports = { User, Image, Entry, Baby };

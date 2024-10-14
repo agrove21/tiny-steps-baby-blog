@@ -1,25 +1,43 @@
 const router = require("express").Router();
-const { Image, Entry } = require("../model");
+const { Image, Entry, Baby } = require("../model");
 const auth = require("../utils/auth");
+const {capitalizeFirstLetter} = require("../utils/formatter");
 
 router.get("/", auth, async (req, res) => {
-  res.render("Welcome", {
-    title: "Welcome to Tiny Steps",
-    description:
-      "Start by entering your baby's name and birthday. Use the side navigation to begin documenting your baby's tiny steps!",
-    layout: "dashboard",
-    loggedIn: req.session.logged_in
-  });
-});
+  try {
+    const babiesData = await Baby.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const babies = babiesData.map((baby) => baby.get({ plain: true }));
 
-router.get("/welcome", auth, async (req, res) => {
-  res.render("Welcome", {
-    title: "Welcome Back",
-    description:
-      "Use the side navigation to document your baby's tiny steps!",
-    layout: "dashboard",
-    loggedIn: req.session.logged_in
-  });
+    const baby = babies[0];
+    baby.babyName = capitalizeFirstLetter(baby.babyName);
+
+    const context = {
+      baby,
+      title: baby?.babyName
+        ? `Welcome Back, ${capitalizeFirstLetter(req.session.name)}`
+        : "Welcome to Tiny Steps",
+      description: baby?.babyName
+        ? "Use the side navigation to document your baby's tiny steps!"
+        : "Start by entering your baby's name and birthday. Use the side navigation to begin documenting your baby's tiny steps!",
+      layout: "dashboard",
+      loggedIn: req.session.logged_in,
+    };
+
+    res.render("Welcome", context);
+  } catch (err) {
+    res.render("welcome", {
+      title: "Welcome",
+      description:
+        "Use the side navigation to document your baby's tiny steps!",
+      layout: "dashboard",
+      loggedIn: req.session.logged_in,
+      error: "Failed to load baby",
+    });
+  }
 });
 
 router.get("/blog", auth, async (req, res) => {
@@ -33,11 +51,10 @@ router.get("/blog", auth, async (req, res) => {
     console.log("testing entries", entriesData);
     res.render("blog", {
       title: "Tiny Tales",
-      description:
-        "Add an entry to capture and cherish every precious memory. ",
+      description: "Add an entry to capture and cherish every precious memory.",
       layout: "dashboard",
       entries,
-      loggedIn: req.session.logged_in
+      loggedIn: req.session.logged_in,
     });
   } catch (err) {
     res.render("blog", {
@@ -55,10 +72,9 @@ router.get("/blog", auth, async (req, res) => {
 router.get("/first", auth, async (req, res) => {
   res.render("first", {
     title: "Firsts and Milestones",
-    description:
-      "Record the date of your little one's firsts and milestones.",
+    description: "Record the date of your little one's firsts and milestones.",
     layout: "dashboard",
-    loggedIn: req.session.logged_in
+    loggedIn: req.session.logged_in,
   });
 });
 
@@ -77,7 +93,7 @@ router.get("/gallery", auth, async (req, res) => {
         "Upload your favorite photos to create a gallery of memories.",
       layout: "dashboard",
       images,
-      loggedIn: req.session.logged_in
+      loggedIn: req.session.logged_in,
     });
   } catch (err) {
     res.render("gallery", {
@@ -95,10 +111,9 @@ router.get("/gallery", auth, async (req, res) => {
 router.get("/advice", auth, async (req, res) => {
   res.render("advice", {
     title: "Parenting Insights",
-    description:
-      "Select each logo to discover helpful insight and tips.",
+    description: "Select each logo to discover helpful insight and tips.",
     layout: "dashboard",
-    loggedIn: req.session.logged_in
+    loggedIn: req.session.logged_in,
   });
 });
 

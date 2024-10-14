@@ -20,15 +20,16 @@ document
     })
       .then(function (response) {
         if (response.ok) {
-          console.log("success");
           document.location.replace("/dashboard");
         } else {
           return response.json();
         }
       })
-        .then(function (data) {
-            showMessage(data.message, "error");
-        })
+      .then(function (data) {
+        if (data) {
+          showMessage(data.message, "error");
+        }
+      })
       .catch(function (error) {
         showMessage(error.message, "error");
       });
@@ -40,7 +41,7 @@ document
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    
+
     fetch("/api/users/login", {
       method: "POST",
       headers: {
@@ -53,17 +54,16 @@ document
     })
       .then(function (response) {
         if (response.ok) {
-          document.location.replace("/dashboard/welcome");
+          document.location.replace("/dashboard");
         } else {
           return response.json();
         }
       })
-        .then(function (data) {
-          if (data){
-            showMessage(data.message, "error");
-          }
-            
-        })
+      .then(function (data) {
+        if (data) {
+          showMessage(data.message, "error");
+        }
+      })
       .catch(function (error) {
         showMessage(error.message, "error");
       });

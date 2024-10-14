@@ -1,19 +1,19 @@
 <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-violet-900 px-6 pb-4">
   <div class="flex h-16 shrink-0 items-center">
-    {{!-- <img
+    {{! <img
       class="h-8 w-auto"
       src="/images/tinysteps4.png"
       alt="Tiny Steps Logo"
-    /> --}}
+    /> }}
   </div>
   <nav class="flex flex-1 flex-col">
     <ul role="list" class="flex flex-1 flex-col gap-y-7">
       <li>
-         <ul role="list" class="-mx-2 space-y-1">
-            <!-- Current: "bg-indigo-700 text-white", Default: "text-indigo-200 hover:text-white hover:bg-indigo-700" -->
-                    <li>
+        <ul role="list" class="-mx-2 space-y-1">
+          <!-- Current: "bg-indigo-700 text-white", Default: "text-indigo-200 hover:text-white hover:bg-indigo-700" -->
+          <li>
             <a
-              href="/dashboard/welcome"
+              href="/dashboard"
               class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-200 hover:bg-violet-900 hover:text-white"
             >
               <svg
@@ -93,27 +93,46 @@
               Parenting Insights
             </a>
           </li>
-          
+
         </ul>
-        <li class="mt-auto" >
-            <a
+        <li class="invisible">
+          <a
             id="logout"
             onclick="logout()"
-              class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-200 hover:bg-violet-900 hover:text-white"
-            >
-              <svg
-                class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-                fill="white"
-              ><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                <path
-                  d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
-                />
-              </svg>
-              Log out
-            </a>
-          </li>
+            class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-200 hover:bg-violet-900 hover:text-white"
+          >
+            <svg
+              class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              fill="white"
+            ><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path
+                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+              />
+            </svg>
+            Log out
+          </a>
+        </li>
+        <li class="mt-auto">
+          <a
+            id="logout"
+            onclick="logout()"
+            class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-200 hover:bg-violet-900 hover:text-white"
+          >
+            <svg
+              class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              fill="white"
+            ><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path
+                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+              />
+            </svg>
+            Log out
+          </a>
+        </li>
       </li>
     </ul>
   </nav>
