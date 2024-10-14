@@ -54,6 +54,7 @@ document.querySelector('.upload').addEventListener('click', async function(event
         showMessage('Image uploaded successfully', 'success');
         document.getElementById('file-upload').value = '';
         document.getElementById('imagePreview').style.display = 'none';
+        window.location.reload();
     } catch (err) {
         showMessage('Failed to upload image', 'error');
     }

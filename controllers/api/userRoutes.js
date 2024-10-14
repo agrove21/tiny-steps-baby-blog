@@ -36,6 +36,7 @@ router.post("/", async (req, res) => {
     delete userData.password;
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.name = userData.name;
       req.session.logged_in = true;
       res.status(200).json(userData);
     });
@@ -73,6 +74,7 @@ router.post("/login", async (req, res) => {
     delete userData.password;
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.name = userData.name;
       req.session.logged_in = true;
       res.json({ user: userData, message: "You are now logged in" });
     });
@@ -81,6 +83,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//Post / logout
 router.post("/logout", auth, (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -91,8 +94,20 @@ router.post("/logout", auth, (req, res) => {
   }
 });
 
+//Post / save-baby-info
+router.post('/save-baby-info', (req, res) => {
+  const babyName = req.body.babyName;
+  const babyBirthday = dayjs(req.body.babyBirthday).format('MMMM D, YYYY');  // Format birthday
 
+  // Save to session
+  req.session.babyName = babyName;
+  req.session.babyBirthday = babyBirthday;
 
+  // Redirect back to the welcome page
+  res.redirect('/welcome');
+});
+
+// POST / upload
 router.post("/upload", auth, upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
