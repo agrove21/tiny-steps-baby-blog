@@ -2,7 +2,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description
-Tiny Steps is a full-stack app designed to help parents capture and cherish every special moment of their child’s early years. Built with a working Express.js API, the app uses Sequelize to interact seamlessly with a PostgreSQL database. Tiny Steps allows parents to document milestones, create a shareable photo gallery, and securely track their baby’s memories. It also includes features for easy sharing with loved ones and personalized record-keeping, ensuring that no milestone or memory is ever missed.
+Tiny Steps is a full-stack app designed to help parents capture and cherish every special moment of their child’s early years. Built with a working Express.js API, the app uses Sequelize to interact seamlessly with a PostgreSQL database. Tiny Steps allows parents to document milestones, create a photo gallery, and securely track their baby’s memories. It also includes features for personalized record-keeping, ensuring that no milestone or memory is ever missed.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -32,9 +32,13 @@ n/a
 ## Deployed Website URL
 <!-- https://zero11-note-taker.onrender.com/ -->
 
-## Screenshot
-### File Structure
+## Screenshots
+<!-- ### File Structure -->
 <!-- <img src="assets/file structure.png" width="800px"> -->
+![Home Page](/develop/images/home.png)
+![Milestones](/develop/images/milestones.png)
+![Sign in](/develop/images/signin.png)
+![Tiny Tales](/develop/images/tinytales.png)
 
 ## Credits
 #### Team Members:
