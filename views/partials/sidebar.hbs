@@ -1,16 +1,33 @@
 <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-violet-900 px-6 pb-4">
   <div class="flex h-16 shrink-0 items-center">
-    <img
+    {{!-- <img
       class="h-8 w-auto"
-      src="/images/tinystepslogo2.png"
+      src="/images/tinysteps4.png"
       alt="Tiny Steps Logo"
-    />
+    /> --}}
   </div>
   <nav class="flex flex-1 flex-col">
     <ul role="list" class="flex flex-1 flex-col gap-y-7">
       <li>
          <ul role="list" class="-mx-2 space-y-1">
             <!-- Current: "bg-indigo-700 text-white", Default: "text-indigo-200 hover:text-white hover:bg-indigo-700" -->
+                    <li>
+            <a
+              href="/dashboard/welcome"
+              class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-200 hover:bg-violet-900 hover:text-white"
+            >
+              <svg
+                class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                fill="white"
+              ><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+                  d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5L64 448l-32 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 192 0 32 0 0-32 0-448zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128l96 0 0 352c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-32 0 0-320c0-35.3-28.7-64-64-64l-96 0 0 64z"
+                />
+              </svg>
+              Welcome
+            </a>
+          </li>
           <li>
             <a
               href="/dashboard/blog"
