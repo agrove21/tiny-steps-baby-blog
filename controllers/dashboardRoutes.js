@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Image, Entry, Baby } = require("../model");
 const auth = require("../utils/auth");
-const {capitalizeFirstLetter} = require("../utils/formatter");
+const { capitalizeFirstLetter } = require("../utils/formatter");
 
 router.get("/", auth, async (req, res) => {
   try {
@@ -18,7 +18,7 @@ router.get("/", auth, async (req, res) => {
     const context = {
       baby,
       title: baby?.babyName
-        ? `Welcome Back, ${capitalizeFirstLetter(req.session.name)}`
+        ? `Welcome, ${capitalizeFirstLetter(req.session.name)}`
         : "Welcome to Tiny Steps",
       description: baby?.babyName
         ? "Use the side navigation to document your baby's tiny steps!"
@@ -27,7 +27,7 @@ router.get("/", auth, async (req, res) => {
       loggedIn: req.session.logged_in,
     };
 
-    res.render("Welcome", context);
+    res.render("welcome", context);
   } catch (err) {
     res.render("welcome", {
       title: "Welcome",
@@ -48,7 +48,6 @@ router.get("/blog", auth, async (req, res) => {
       },
     });
     const entries = entriesData.map((entry) => entry.get({ plain: true }));
-    console.log("testing entries", entriesData);
     res.render("blog", {
       title: "Tiny Tales",
       description: "Add an entry to capture and cherish every precious memory.",
