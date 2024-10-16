@@ -104,7 +104,7 @@ router.post('/save-baby-info', (req, res) => {
   req.session.babyBirthday = babyBirthday;
 
   // Redirect back to the welcome page
-  res.redirect('/welcome');
+  res.redirect('/dashboard');
 });
 
 // POST / upload
